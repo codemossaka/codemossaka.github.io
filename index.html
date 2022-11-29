@@ -6,9 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Godson Essonga</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body class="bg-gray-300 w-screen h-screen lg:px-[30%]  lg:py-[5%] select-none" oncontextmenu="return false;">
-<div class="w-full h-full  shadow bg-white flex flex-col items-center border-2 border-gray-300 rounded-lg p-5">
+<div class="w-full h-full  shadow bg-white flex flex-col items-center border-2 border-gray-300 rounded-lg p-5"  id="app">
+    <div>
+        <ul class="flex space-x-3">
+            <li v-for="(menu, index) in menus" :key="index" class="p-3">
+                <a :href="menu.link">{{menu.name}}</a>
+            </li>
+        </ul>
+    </div>
     <img src="static/moi.jpg" alt="me"
          class="img rounded-full w-[150px] h-[200px] select-none shadow border-2 border-blue-200">
     <h1 class="text-3xl	">Godson Essonga</h1>
@@ -16,32 +24,44 @@
     <h3 class="font-thin">Java/Kotlin developer</h3>
     <div class="mt-5">
         <ul class="lg:flex">
-            <li class="p-2">
-                <a href="https://github.com/codemossaka" class="flex space-x-1">
-                    <img src="static/github.png" alt="github" class="w-6">
-                    <span>Github</span>
-                </a>
-            </li>
-            <li class="p-2">
-                <a href="https://www.linkedin.com/in/peyagodson/" class="flex space-x-1">
-                    <img src="static/linkedin.png" alt="linkedin" class="w-6">
-                    <span>Linkedin</span>
-                </a>
-            </li>
-            <li class="p-2">
-                <a href="https://t.me/+x2-aVGx1uoNmNmFi" class="flex space-x-1">
-                    <img src="static/telegram.png" alt="telegram" class="w-6">
-                    <span>My community</span>
+            <li class="p-2" v-for="(social, index) in socials" :key="index">
+                <a :href="social.link" class="flex space-x-1">
+                    <img :src="social.icon" alt="social.name" class="img w-6">
+                    <span>{{social.name}}</span>
                 </a>
             </li>
         </ul>
     </div>
 </div>
-<script>
-    const img = document.querySelector('img')
-    img.ondragstart = () => {
-        return false;
-    };
+<script src="mixins/mixin.js"></script>
+<script type="application/javascript">
+
+    const {createApp} = Vue;
+
+    createApp({
+        mixins:[myMixin],
+        data() {
+            return {
+                socials: [
+                    {
+                        name: "Github",
+                        icon: 'static/github.png',
+                        link: 'https://github.com/codemossaka',
+                    },
+                    {
+                        name: "Linkedin",
+                        icon: 'static/linkedin.png',
+                        link: 'https://www.linkedin.com/in/peyagodson/',
+                    },
+                    {
+                        name: "My community",
+                        icon: 'static/telegram.png',
+                        link: 'https://t.me/+x2-aVGx1uoNmNmFi',
+                    },
+                ]
+            }
+        },
+    }).mount('#app')
 </script>
 </body>
 </html>

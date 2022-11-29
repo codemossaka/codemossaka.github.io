@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Godson Essonga</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body class="bg-gray-300 w-screen h-screen lg:px-[30%]  lg:py-[5%] select-none" oncontextmenu="return false;">
+<div class="w-full h-full  shadow bg-white flex flex-col items-center border-2 border-gray-300 rounded-lg p-5" id="app">
+    <div>
+        <ul class="flex space-x-3">
+            <li v-for="(menu, index) in menus" :key="index" class="p-3">
+                <a :href="menu.link">{{menu.name}}</a>
+            </li>
+        </ul>
+        <img src="" alt="" class="">
+    </div>
+    <div>
+        <ul class="p-5 space-y-3">
+            <a v-for="(course, index) in courses" :key="index" :href="course.link">
+                <li
+                    class="flex shadow border p-5 cursor-pointer hover:bg-gray-200">
+
+                    <img :src="course.image" alt="" class="w-[100px] h-[100px] border img">
+                    <span class="px-5 font-bold hover:underline">{{course.name}}</span>
+
+                </li>
+            </a>
+        </ul>
+    </div>
+
+</div>
+
+<script src="mixins/mixin.js"></script>
+<script>
+
+
+    const {createApp} = Vue;
+
+    createApp({
+        mixins: [myMixin],
+        data() {
+            return {
+                courses: [
+                    {
+                        name: "Présentation de Jetpack compose",
+                        image: "static/courses/compose.png",
+                        link: 'https://www.youtube.com/watch?v=k0g5jtb22Sc'
+                    },
+                    {
+                        name: "Kotlin (Introduction)",
+                        image: "static/courses/kotlin.png",
+                        link: 'https://t.me/c/1895544576/27'
+                    },
+                    {
+                        name: "Proatique - Application tutu.ru (jetpack compose)",
+                        image: "static/courses/tutu.jpg",
+                        link: 'https://t.me/c/1895544576/77'
+                    }
+                ]
+            }
+        },
+
+    }).mount('#app')
+</script>
+</body>
+</html>
